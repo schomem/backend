@@ -21,7 +21,6 @@ Port=3306
 User=root
 Password=root
 Database=schomem
-Prefix=schomem_
 `
 
 type Config struct {
@@ -46,7 +45,6 @@ type DatabaseConfig struct {
 	User     string
 	Password string
 	Database string
-	Prefix   string
 }
 
 func NewConfigFile(path, value string) {
@@ -93,7 +91,6 @@ func ParseConfig(path string) *Config {
 			User:     cfg.Section("Database").Key("User").MustString("root"),
 			Password: cfg.Section("Database").Key("Password").MustString("root"),
 			Database: cfg.Section("Database").Key("Database").MustString("schomem"),
-			Prefix:   cfg.Section("Database").Key("Database").MustString("schomem_"),
 		},
 	}
 	return config
