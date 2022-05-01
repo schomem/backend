@@ -1,10 +1,11 @@
 package services
 
 import (
-	"fmt"
 	"schomem/app/dao"
 	"schomem/app/models"
 	"strconv"
+
+	"github.com/sirupsen/logrus"
 )
 
 type UserMgr struct{}
@@ -23,6 +24,6 @@ func (mgr *UserMgr) Register(user *models.User) error {
 }
 
 func (mgr *UserMgr) Login(user *models.UserLogin) string {
-	fmt.Println(dao.UserDao.FindOneByEmail(user.Email))
+	logrus.Debug(dao.UserDao.FindOneByEmail(user.Email))
 	return ""
 }

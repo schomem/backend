@@ -1,9 +1,9 @@
 package utils
 
 import (
-	"fmt"
 	"os"
 
+	"github.com/sirupsen/logrus"
 	"gopkg.in/ini.v1"
 )
 
@@ -63,13 +63,11 @@ func NewConfigFile(path, value string) {
 		f, err := os.Create(path)
 
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			logrus.Panic(err)
 		} else {
 			_, err = f.Write([]byte(value))
 			if err != nil {
-				fmt.Println(err)
-				os.Exit(1)
+				logrus.Panic(err)
 			}
 			defer f.Close()
 		}
@@ -80,8 +78,7 @@ func ParseConfig(path string) *Config {
 	NewConfigFile(path, DEFAULT_CONFIG)
 	cfg, err := ini.Load(path)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		logrus.Panic(err)
 	}
 
 	config := &Config{
