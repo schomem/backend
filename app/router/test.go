@@ -1,9 +1,18 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"schomem/app/consts"
+	"schomem/app/controllers"
+
+	"github.com/gin-gonic/gin"
+)
 
 func TestRouter(r *gin.RouterGroup) {
-	r.GET("/test", func(c *gin.Context) {
-		c.String(200, "ok")
+	r.GET("/hi", func(c *gin.Context) {
+		controllers.Result.Ok(c, "ok")
+	})
+
+	r.GET("/allowRegister", func(c *gin.Context) {
+		controllers.Result.Ok(c, consts.CONFIG.Service.Register)
 	})
 }

@@ -21,12 +21,16 @@ Port=3306
 User=root
 Password=root
 Database=schomem
+
+[Service]
+Register=true
 `
 
 type Config struct {
 	General  *GeneralConfig
 	SSL      *SSLConfig
 	Database *DatabaseConfig
+	Service  *ServiceConfig
 }
 
 type GeneralConfig struct {
@@ -45,6 +49,10 @@ type DatabaseConfig struct {
 	User     string
 	Password string
 	Database string
+}
+
+type ServiceConfig struct {
+	Register bool
 }
 
 func NewConfigFile(path, value string) {
@@ -91,6 +99,9 @@ func ParseConfig(path string) *Config {
 			User:     cfg.Section("Database").Key("User").MustString("root"),
 			Password: cfg.Section("Database").Key("Password").MustString("root"),
 			Database: cfg.Section("Database").Key("Database").MustString("schomem"),
+		},
+		Service: &ServiceConfig{
+			Register: cfg.Section("Service").Key("Register").MustBool(true),
 		},
 	}
 	return config

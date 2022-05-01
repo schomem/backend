@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"schomem/app/consts"
+	"schomem/app/controllers"
 	"schomem/app/dao"
 	"schomem/app/router"
 	"schomem/app/utils"
@@ -33,6 +34,9 @@ func main() {
 
 	// 初始化数据库
 	dao.InitDb()
+
+	// 初始化验证器
+	controllers.InitVali()
 
 	// r.SetTrustedProxies([]string{""})
 
