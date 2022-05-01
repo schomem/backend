@@ -11,6 +11,7 @@ import (
 	"schomem/app/utils"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 )
 
 var (
@@ -23,6 +24,8 @@ func init() {
 	flag.Parse()
 
 	consts.CONFIG = utils.ParseConfig(configPath)
+
+	logrus.SetLevel(logrus.TraceLevel)
 }
 
 func main() {
